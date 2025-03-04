@@ -45,18 +45,29 @@ int main(void) {
     GPIOC->CRH &= ~(GPIO_CRH_CNF13 | GPIO_CRH_MODE13); // GPIOC->CRH[23:20]=0000
     GPIOC->CRH |= GPIO_CRH_MODE13_0; // GPIOC->CRH[23:20]=0001
 
+    // Port PB0 as Input
+    RCC->APB2ENR |= RCC_APB2ENR_IOPBEN;
+    GPIOB->CRL &= ~(GPIO_CRL_CNF0 | GPIO_CRL_MODE0); // GPIOB->CRL[3:0]=0000
+    GPIOB->CRL |= GPIO_CRL_CNF0_1; // GPIOB->CRL[3:0]=1000
+    GPIOB->ODR |= GPIO_ODR_ODR0; // PB0 Internal pull-up resister
+
     /* TIM2 Configuration */
-    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+    /*RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
     RCC->APB1RSTR |= RCC_APB1RSTR_TIM2RST;
     RCC->APB1RSTR &= ~RCC_APB1RSTR_TIM2RST;
-    TIM2->PSC = 1023;
-    TIM2->ARR = 4095;
+    TIM2->PSC = 4000;
+    TIM2->ARR = 20000;
     TIM2->DIER |= TIM_DIER_UIE; // Enable Update Interrupt
     NVIC_ClearPendingIRQ(TIM2_IRQn);
     NVIC_EnableIRQ(TIM2_IRQn); // Enable IRQ in NVIC
     TIM2->CR1 |= TIM_CR1_CEN; // Start timer
     while (1) {
         __asm volatile ("nop");
+    }*/
+
+    while(1){
+        
+
     }
 
     /*while(1){
