@@ -66,8 +66,11 @@ int main(void) {
     }*/
 
     while(1){
-        
-
+        if(GPIOB->IDR & GPIO_IDR_IDR0){
+            GPIOC->ODR &= ~GPIO_ODR_ODR13;
+        } else {
+            GPIOC->ODR |= GPIO_ODR_ODR13;
+        }
     }
 
     /*while(1){
